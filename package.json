@@ -1,0 +1,13 @@
+{
+  "name": "samthehermit-photo-album",
+  "version": "1.0.0",
+  "description": "Album photo pour SamTheHermit",
+  "main": "index.html",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'Build complete - static files ready for deployment'"
+  },
+  "keywords": ["photo", "album", "hermit"],
+  "author": "SamTheHermit"
+}

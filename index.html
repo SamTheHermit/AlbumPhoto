@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SamTheHermit - Albums Photo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>SamTheHermit</h1>
+            <p class="subtitle">Créez et partagez vos albums photo</p>
+        </header>
+
+        <!-- Page 1: Upload des photos -->
+        <div id="page-upload" class="page active">
+            <div class="upload-section">
+                <h2>Ajouter vos photos</h2>
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <p>Glissez vos photos ici ou cliquez pour sélectionner</p>
+                        <p class="upload-hint">Formats acceptés: JPG, PNG, GIF (max 10MB par photo)</p>
+                    </div>
+                    <input type="file" id="photo-input" multiple accept="image/*" style="display: none;">
+                </div>
+                
+                <div id="photo-preview" class="photo-preview"></div>
+                
+                <div class="upload-actions">
+                    <button id="clear-photos" class="btn btn-secondary" style="display: none;">
+                        Effacer tout
+                    </button>
+                    <button id="next-to-organize" class="btn btn-primary" style="display: none;">
+                        Organiser l'album (0 photos)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Organisation de l'album -->
+        <div id="page-organize" class="page">
+            <div class="organize-section">
+                <h2>Organisez votre album</h2>
+                
+                <div class="album-settings">
+                    <div class="setting-group">
+                        <label for="album-title">Titre de l'album:</label>
+                        <input type="text" id="album-title" placeholder="Mon album photo" value="Mon album photo">
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="album-description">Description (optionnelle):</label>
+                        <textarea id="album-description" placeholder="Décrivez votre album..."></textarea>
+                    </div>
+                </div>
+
+                <div class="photo-grid" id="photo-grid">
+                    <!-- Les photos seront ajoutées ici dynamiquement -->
+                </div>
+
+                <div class="organize-actions">
+                    <button id="back-to-upload" class="btn btn-secondary">
+                        ← Retour
+                    </button>
+                    <button id="create-album" class="btn btn-primary">
+                        Créer l'album
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Album créé -->
+        <div id="page-album" class="page">
+            <div class="album-section">
+                <div class="album-header">
+                    <h2 id="final-album-title">Mon album photo</h2>
+                    <p id="final-album-description"></p>
+                    <div class="album-stats">
+                        <span id="photo-count">0 photos</span>
+                        <span id="creation-date"></span>
+                    </div>
+                </div>
+
+                <div class="album-grid" id="album-grid">
+                    <!-- L'album final sera affiché ici -->
+                </div>
+
+                <div class="album-actions">
+                    <button id="download-pdf" class="btn btn-primary">
+                        📄 Télécharger PDF
+                    </button>
+                    <button id="share-album" class="btn btn-secondary">
+                        🔗 Partager
+                    </button>
+                    <button id="new-album" class="btn btn-outline">
+                        ➕ Nouvel album
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de partage -->
+        <div id="share-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Partager votre album</h3>
+                    <button class="modal-close" id="close-share-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Lien de partage généré:</p>
+                    <div class="share-link-container">
+                        <input type="text" id="share-link" readonly>
+                        <button id="copy-link" class="btn btn-small">Copier</button>
+                    </div>
+                    <p class="share-note">Ce lien permet de visualiser votre album en ligne.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading overlay -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Traitement en cours...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
